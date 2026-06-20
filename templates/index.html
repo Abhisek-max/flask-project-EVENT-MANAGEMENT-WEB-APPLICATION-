@@ -9,6 +9,48 @@
 
 <body>
 
+    <div class="cursor-glow"></div>
+
+<script>
+function createBubble(){
+    const bubble = document.createElement("span");
+
+    bubble.classList.add("bubble");
+
+    // random position
+    bubble.style.left = Math.random() * 100 + "vw";
+
+    // random size
+    let size = Math.random() * 20 + 10;
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+
+    document.querySelector(".floating-bg").appendChild(bubble);
+
+    // remove after animation
+    setTimeout(() => {
+        bubble.remove();
+    }, 12000);
+}
+
+// 🔥 frequency control (VERY IMPORTANT)
+setInterval(createBubble, 200); // 👈 lower = more frequent
+</script>
+
+
+    <div class="floating-bg">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    </div>
+
     <nav>
         <div class="logo">
            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
@@ -100,8 +142,9 @@
 
 </section>
 
-<footer>
-        
+<footer class="cinematic-footer">
+
+    <div class="footer-glow"></div>
 
     <div class="footer-content">
 
@@ -125,6 +168,16 @@
     </div>
 
 </footer>
+
+
+<script>
+const glow = document.querySelector(".cursor-glow");
+
+document.addEventListener("mousemove", (e) => {
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
+});
+</script>
 
 </body>
 </html>

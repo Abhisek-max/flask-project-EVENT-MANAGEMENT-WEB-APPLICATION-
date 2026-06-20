@@ -62,7 +62,20 @@ def init_db():
              event_id INTEGER
         )
     """)
-    
+
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS admin (
+             id INTEGER PRIMARY KEY AUTOINCREMENT,
+             email TEXT UNIQUE,
+             password TEXT
+        )
+    """)
+
+    cursor.execute("""
+        INSERT OR IGNORE INTO admin (email, password)
+        VALUES ('admin@gmail.com', 'admin123')
+   """)
 
 
 
@@ -91,6 +104,9 @@ def home():
 @app.route("/admin")
 def admin():
 
+    if "admin" not in session:
+        return redirect("/admin_login")
+
     conn = sqlite3.connect("events.db")
     cursor = conn.cursor()
 
@@ -107,6 +123,12 @@ def admin():
         events=events,
         students=students
     )
+
+
+@app.route("/admin_logout")
+def admin_logout():
+    session.pop("admin", None)
+    return redirect("/admin_login")
 
 
 # ---------- EVENT DETAILS PAGE ----------
@@ -772,6 +794,36 @@ def event_counts():
     conn.close()
 
     return {row[0]: row[1] for row in rows}
+
+
+# ---------- ADMIN LOGIN ----------
+@app.route("/admin_login", methods=["GET", "POST"])
+def admin_login():
+
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+
+        conn = sqlite3.connect("events.db")
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            SELECT * FROM admin
+            WHERE email=? AND password=?
+        """, (email, password))
+
+        admin = cursor.fetchone()
+        conn.close()
+
+        if admin:
+            session["admin"] = True
+            return redirect("/admin")
+        else:
+            return render_template("admin_login.html", message="Invalid credentials")
+
+    return render_template("admin_login.html")
+
+
 # ---------- RUN ----------
 if __name__ == "__main__":
     app.run(debug=True)

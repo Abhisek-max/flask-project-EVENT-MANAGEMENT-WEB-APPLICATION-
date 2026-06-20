@@ -1,0 +1,9 @@
+          MAILS                                       PASSWORDS
+
+
+    Abhisek@gmail.com                                 abhi123
+    Akash@gmail.com                                   akash123
+    Manas@gmail.com                                   manas123
+    Soumya@gmail.com                                  soumya123
+    Manoj@gmail.com                                   manoj123
+    Lokesh@gmail.com                                  lokesh123

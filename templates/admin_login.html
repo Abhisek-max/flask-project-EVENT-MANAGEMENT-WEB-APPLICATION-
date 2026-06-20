@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login - Eventify</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+/* LOGIN BOX */
+.login-box{
+    width:350px;
+    padding:30px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    text-align:center;
+}
+
+/* TITLE */
+.login-box h2{
+    color:#00d4ff;
+    margin-bottom:20px;
+}
+
+/* INPUT */
+.login-box input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    outline:none;
+    border-radius:8px;
+    background:rgba(255,255,255,0.1);
+    color:white;
+}
+
+/* PLACEHOLDER */
+.login-box input::placeholder{
+    color:#cbd5e1;
+}
+
+/* BUTTON */
+.login-box button{
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:#00d4ff;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login-box button:hover{
+    box-shadow:0 0 15px #00d4ff;
+    transform:scale(1.05);
+}
+
+/* MESSAGE */
+.msg{
+    margin-top:10px;
+    color:#f87171;
+    font-size:14px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h2>Admin Login</h2>
+
+    <form method="POST">
+
+        <input type="email" name="email" placeholder="Enter Admin Email" required>
+
+        <input type="password" name="password" placeholder="Enter Password" required>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <div class="msg">
+        {{ message }}
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -160,7 +160,20 @@ th:last-child,
 td:last-child{
     min-width:280px;
 }
-    }
+
+.logout-btn{
+    background:#ef4444;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+.logout-btn:hover{
+    box-shadow:0 0 12px #ef4444;
+}
+
+}
 
 </style>
 
@@ -173,9 +186,9 @@ td:last-child{
 </div>
 
 <div class="top-links">
-    <a href="/">🏠 Home</a>
-    <a href="/add_event">➕ Add Event</a>
-    <a href="/admin">📅 Events</a>
+    <a href="/">🏠Home</a>
+    <a href="/add_event">➕Add Event</a>
+    <a href="/admin_logout">🚪Logout</a>
 </div>
 
 <div class="container">
@@ -258,7 +271,6 @@ td:last-child{
             <th>Branch</th>
             <th>Email</th>
             <th>Actions</th>
-            <th>Registrations</th>
         </tr>
 
         {% for student in students %}
