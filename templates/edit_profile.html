@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/profile.css') }}">
+</head>
+<body>
+
+<h1 class="profile-title">Edit Profile</h1>
+
+<div class="profile-card">
+
+    <form method="POST">
+
+        <div class="profile-info">
+
+            <p>
+                <strong>Name</strong><br>
+                <input type="text"
+                       name="name"
+                       value="{{ user[1] }}"
+                       required>
+            </p>
+
+            <p>
+                <strong>Registration Number</strong><br>
+                <input type="text"
+                       name="registration_no"
+                       value="{{ user[2] }}"
+                       required>
+            </p>
+
+            <p>
+                <strong>Contact</strong><br>
+                <input type="text"
+                       name="contact"
+                       value="{{ user[3] }}"
+                       required>
+            </p>
+
+            <p>
+                <strong>Branch</strong><br>
+                <input type="text"
+                       name="branch"
+                       value="{{ user[4] }}"
+                       required>
+            </p>
+
+            <p>
+                <strong>Email</strong><br>
+                <input type="email"
+                       name="email"
+                       value="{{ user[5] }}"
+                       required>
+            </p>
+
+        </div>
+
+        <div class="profile-buttons">
+            <button type="submit" class="btn">
+                Save Changes
+            </button>
+
+            <a href="/profile" class="btn">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

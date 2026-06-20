@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Event Details</title>
+    <link rel="stylesheet"
+       href="{{ url_for('static',
+     filename='css/event_details.css') }}">
+</head>
+
+
+
+<body>
+
+<div class="header">
+    <h1>Event Details</h1>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>{{ event[1] }}</h2>
+
+        <p><span class="label">Date:</span> {{ event[2] }}</p>
+        <p><span class="label">Time:</span> {{ event[3] }}</p>
+        <p><span class="label">Venue:</span> {{ event[4] }}</p>
+        <p><span class="label">Speaker:</span> {{ event[5] }}</p>
+        <p><span class="label">Goal:</span> {{ event[6] }}</p>
+        <p><span class="label">Description:</span> {{ event[7] }}</p>
+
+        
+       <div class="button-group">
+
+          {% if session.get('user_id') %}
+          <a href="/join_event/{{ event[0] }}" class="btn">
+             Join Event
+          </a>
+
+          {% endif %}
+          <a href="/" class="btn back-btn">
+             Back To Home
+          </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

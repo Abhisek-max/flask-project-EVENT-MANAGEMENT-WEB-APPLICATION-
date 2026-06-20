@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participants</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static',
+    filename='css/participants.css') }}">
+</head>
+<body>
+
+    <div class="header">
+        <h1>{{ event[0] }} Participants</h1>
+    </div>
+
+    <div class="container">
+
+        {% if participants %}
+
+        <table class="participants-table">
+
+            <tr>
+                <th>Name</th>
+                <th>Registration No</th>
+                <th>Branch</th>
+                <th>Email</th>
+            </tr>
+
+            {% for student in participants %}
+
+            <tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[2] }}</td>
+                <td>{{ student[3] }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <div class="no-participants">
+            <h2>No Participants Yet</h2>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="footer-btn">
+        <a href="/admin" class="btn">
+            Back To Dashboard
+        </a>
+    </div>
+
+</body>
+</html>

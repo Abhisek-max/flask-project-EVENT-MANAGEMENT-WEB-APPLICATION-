@@ -1,0 +1,192 @@
+/* ===== PROFILE PAGE ===== */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+}
+
+/* ===== PAGE TITLE ===== */
+
+.profile-title {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 42px;
+    color: #00d4ff;
+}
+
+.profile-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #00d4ff;
+    margin: 12px auto 0;
+    border-radius: 5px;
+}
+
+/* ===== PROFILE CARD ===== */
+
+.profile-card {
+    width: 500px;
+    max-width: 90%;
+    margin: 50px auto;
+    padding: 35px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+
+    transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,212,255,0.35);
+}
+
+/* ===== PROFILE ICON ===== */
+
+.profile-avatar {
+    width: 110px;
+    height: 110px;
+    margin: auto;
+    border-radius: 50%;
+    background: #00d4ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 50px;
+    color: black;
+    font-weight: bold;
+}
+
+/* ===== NAME ===== */
+
+.profile-name {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 28px;
+    color: #00d4ff;
+}
+
+/* ===== INFO ===== */
+
+.profile-info {
+    margin-top: 30px;
+}
+
+.profile-info p {
+    padding: 12px 15px;
+    margin: 12px 0;
+
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+.profile-info strong {
+    color: #00d4ff;
+}
+
+/* ===== BUTTONS ===== */
+
+.profile-buttons {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.profile-buttons a {
+    display: inline-block;
+    margin: 8px;
+    padding: 12px 22px;
+
+    background: #00d4ff;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.profile-buttons a:hover {
+    background: white;
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:none;
+    border-radius:8px;
+    box-sizing:border-box;
+    font-size:16px;
+}
+
+button.btn{
+    border:none;
+    cursor:pointer;
+    padding:12px 22px;
+    background:#00d4ff;
+    color:black;
+    font-weight:bold;
+    border-radius:8px;
+}
+
+button.btn:hover{
+    background:white;
+    box-shadow:0 0 15px #00d4ff;
+}
+
+
+
+.profile-avatar{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:auto;
+    background:#00d4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:50px;
+}
+
+.profile-avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+input[type="file"]{
+    width:100%;
+    margin-top:15px;
+    margin-bottom:15px;
+    color:white;
+}
+
+.remove-btn{
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#ef4444;
+    color:white;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.remove-btn:hover{
+    background:#dc2626;
+}

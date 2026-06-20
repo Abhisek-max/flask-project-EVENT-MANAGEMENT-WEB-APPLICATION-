@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Events</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static',
+    filename='css/my_events.css') }}">
+</head>
+<body>
+
+<div class="header">
+    <h1>My Registered Events</h1>
+</div>
+
+<div class="container">
+
+    {% if events %}
+
+        {% for event in events %}
+
+        <div class="event-card">
+
+            <h2>{{ event[1] }}</h2>
+
+            <p>
+                <span class="label">Date:</span>
+                {{ event[2] }}
+            </p>
+
+            <p>
+                <span class="label">Venue:</span>
+                {{ event[4] }}
+            </p>
+
+            <a href="/event/{{ event[0] }}" class="btn">
+                View Details
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="no-events">
+
+            <h2>No Events Joined Yet</h2>
+
+            <p>
+                Explore events and register to see them here.
+            </p>
+
+            <a href="/" class="btn">
+                Browse Events
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+<div class="footer-btn">
+    <a href="/" class="btn">
+        Back To Home
+    </a>
+</div>
+
+</body>
+</html>
