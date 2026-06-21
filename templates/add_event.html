@@ -1,227 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Event</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Event</title>
 
-<style>
-
-    body{
-        margin:0;
-        font-family:'Segoe UI', sans-serif;
-        background:linear-gradient(135deg,#0f172a,#1e293b);
-        min-height:100vh;
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      min-height: 100vh;
+      display: flex;
     }
 
-    /* HEADER */
-
-    .header{
-        text-align:center;
-        padding:25px;
+    .header {
+      text-align: center;
+      padding: 25px;
     }
 
-    .header h1{
-        color:#00d4ff;
-        margin:0;
-        font-size:38px;
+    .header h1 {
+      color: #00d4ff;
+      margin: 0;
+      font-size: 38px;
     }
 
-    /* FORM CONTAINER */
-
-    .container{
-        display:flex;
-        justify-content:center;
-        padding:30px;
+    .container {
+      display: flex;
+      justify-content: center;
+      padding: 30px;
     }
 
-    /* GLASS CARD */
-
-    .card{
-        width:500px;
-        background:rgba(255,255,255,0.08);
-        -webkit-backdrop-filter:blur(12px);
-        backdrop-filter:blur(12px);
-        border:1px solid rgba(255,255,255,0.1);
-        border-radius:18px;
-        padding:35px;
-        box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    .card {
+      width: 500px;
+      background: rgba(101, 62, 62, 0.08);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 35px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
 
-    .card h2{
-        text-align:center;
-        color:#00d4ff;
-        margin-bottom:25px;
+    .card h2 {
+      text-align: center;
+      color: #00d4ff;
+      margin-bottom: 25px;
     }
 
-    .card h2::after{
-        content:"";
-        display:block;
-        width:80px;
-        height:4px;
-        background:#00d4ff;
-        margin:10px auto 0;
-        border-radius:5px;
+    .card h2::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #00d4ff;
+      margin: 10px auto 0;
+      border-radius: 5px;
     }
 
-    label{
-        display:block;
-        color:white;
-        margin-bottom:6px;
-        font-weight:600;
+    label {
+      display: block;
+      color: white;
+      margin-bottom: 6px;
+      font-weight: 600;
     }
 
     input,
-    textarea{
-        width:100%;
-        padding:12px;
-        margin-bottom:15px;
-        border:none;
-        border-radius:8px;
-        box-sizing:border-box;
-        font-size:15px;
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 15px;
     }
 
     input:focus,
-    textarea:focus{
-        outline:none;
-        box-shadow:0 0 10px #00d4ff;
+    textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px #00d4ff;
     }
 
-    button{
-        width:100%;
-        padding:12px;
-        border:none;
-        border-radius:8px;
-        background:#00d4ff;
-        color:black;
-        font-size:16px;
-        font-weight:bold;
-        cursor:pointer;
-        transition:0.3s;
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #00d4ff;
+      color: black;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    button:hover{
-        transform:scale(1.03);
-        box-shadow:0 0 15px #00d4ff;
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px #00d4ff;
     }
 
-    .success{
-        text-align:center;
-        color:#4ade80;
-        margin-bottom:15px;
-        font-weight:bold;
+    .success {
+      text-align: center;
+      color: #4ade80;
+      margin-bottom: 15px;
+      font-weight: bold;
     }
 
-    .dashboard-link{
-        display:block;
-        text-align:center;
-        margin-top:20px;
-        color:#00d4ff;
-        text-decoration:none;
-        font-weight:bold;
+    .dashboard-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #00d4ff;
+      text-decoration: none;
+      font-weight: bold;
     }
 
-    .dashboard-link:hover{
-        text-decoration:underline;
+    .dashboard-link:hover {
+      text-decoration: underline;
     }
-
-</style>
-
+  </style>
 </head>
+
+
 <body>
 
-<div class="header">
+  <div class="header">
     <h1>🚀 Add New Event</h1>
-</div>
+  </div>
 
-<div class="container">
+  <div class="container">
 
     <div class="card">
+      <h2>Event Form</h2>
 
-        <h2>Event Form</h2>
+      {% if message %}
+      <p class="success">{{ message }}</p>
+      {% endif %}
 
-        {% if message %}
-            <p class="success">{{ message }}</p>
-        {% endif %}
+      <form method="POST" action="{{ url_for('add_event') }}">
 
-        <form method="POST" action="{{ url_for('add_event') }}">
+        <label for="event_name">Event Name</label>
+        <input id="event_name" name="event_name" type="text" placeholder="Enter Event Name" required>
 
-            <label for="event_name">Event Name</label>
-            <input
-                id="event_name"
-                name="event_name"
-                type="text"
-                placeholder="Enter Event Name"
-                required
-            >
+        <label for="event_date">Event Date</label>
+        <input id="event_date" name="event_date" type="date" required>
 
-            <label for="event_date">Event Date</label>
-            <input
-                id="event_date"
-                name="event_date"
-                type="date"
-                required
-            >
+        <label for="event_time">Event Time</label>
+        <input id="event_time" name="event_time" type="time" required>
 
-            <label for="event_time">Event Time</label>
-            <input
-                id="event_time"
-                name="event_time"
-                type="time"
-                required
-            >
+        <label for="venue">Venue</label>
+        <input id="venue" name="venue" type="text" placeholder="Enter Venue" required>
 
-            <label for="venue">Venue</label>
-            <input
-                id="venue"
-                name="venue"
-                type="text"
-                placeholder="Enter Venue"
-                required
-            >
+        <label for="guest_speaker">Guest Speaker</label>
+        <input id="guest_speaker" name="guest_speaker" type="text" placeholder="Enter Guest Speaker Name">
 
-            <label for="guest_speaker">Guest Speaker</label>
-            <input
-                id="guest_speaker"
-                name="guest_speaker"
-                type="text"
-                placeholder="Enter Guest Speaker Name"
-            >
+        <label for="event_goal">Event Goal</label>
+        <input id="event_goal" name="event_goal" type="text" placeholder="Enter Event Goal">
 
-            <label for="event_goal">Event Goal</label>
-            <input
-                id="event_goal"
-                name="event_goal"
-                type="text"
-                placeholder="Enter Event Goal"
-            >
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4" placeholder="Describe the Event"></textarea>
 
-            <label for="description">Description</label>
-            <textarea
-                id="description"
-                name="description"
-                rows="4"
-                placeholder="Describe the Event"
-            ></textarea>
+        <button type="submit">
+          Add Event
+        </button>
 
-            <button type="submit">
-                Add Event
-            </button>
+      </form>
 
-        </form>
+      <a class="dashboard-link" href="/admin">
+        Go to Admin Dashboard
+      </a>
 
-        <a class="dashboard-link" href="/admin">
-            Go to Admin Dashboard
-        </a>
 
     </div>
 
-</div>
+  </div>
 
 </body>
-</html>
 
-
-</body>
 </html>

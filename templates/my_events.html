@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Events</title>
 
-    <link rel="stylesheet"
-    href="{{ url_for('static',
+    <link rel="stylesheet" href="{{ url_for('static',
     filename='css/my_events.css') }}">
 </head>
+
 <body>
 
-<div class="header">
-    <h1>My Registered Events</h1>
-</div>
+    <div class="header">
+        <h1>My Registered Events</h1>
+    </div>
 
-<div class="container">
+    <div class="container">
 
-    {% if events %}
+        {% if events %}
 
         {% for event in events %}
 
@@ -39,11 +40,19 @@
                 View Details
             </a>
 
+            <a href="/leave_event/{{ event[0] }}" class="btn leave-btn"
+                onclick="return confirm('Are you sure you want to leave this event?')">
+                 Leave Event
+            </a>
+
+
+
+
         </div>
 
         {% endfor %}
 
-    {% else %}
+        {% else %}
 
         <div class="no-events">
 
@@ -59,15 +68,16 @@
 
         </div>
 
-    {% endif %}
+        {% endif %}
 
-</div>
+    </div>
 
-<div class="footer-btn">
-    <a href="/" class="btn">
-        Back To Home
-    </a>
-</div>
+    <div class="footer-btn">
+        <a href="/" class="btn">
+            Back To Home
+        </a>
+    </div>
 
 </body>
+
 </html>

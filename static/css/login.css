@@ -1,115 +1,126 @@
-body{
-    margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#0f172a,#1e293b);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.login-container{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:30px;
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
 }
 
-.login-card{
-    width:420px;
-    background:rgba(255,255,255,0.08);
-    -webkit-backdrop-filter:blur(12px);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:18px;
-    padding:35px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+.login-card {
+    width: 420px;
+    background: rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.login-card h1{
-    text-align:center;
-    color:#00d4ff;
-    margin-bottom:25px;
+.login-card h1 {
+    text-align: center;
+    color: #00d4ff;
+    margin-bottom: 25px;
 }
 
-.login-card h1::after{
-    content:"";
-    display:block;
-    width:80px;
-    height:4px;
-    background:#00d4ff;
-    margin:10px auto 0;
-    border-radius:5px;
+.login-card h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #00d4ff;
+    margin: 10px auto 0;
+    border-radius: 5px;
 }
 
-.login-card input{
-    width:100%;
-    padding:12px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:8px;
-    box-sizing:border-box;
-    font-size:15px;
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 15px;
 }
 
-.login-card input:focus{
-    outline:none;
-    box-shadow:0 0 10px #00d4ff;
+.login-card input:focus {
+    outline: none;
+    box-shadow: 0 0 10px #00d4ff;
 }
 
-.login-card button{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    background:#00d4ff;
-    color:black;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
+.login-card button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #00d4ff;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.login-card button:hover{
-    transform:scale(1.03);
-    box-shadow:0 0 15px #00d4ff;
+.login-card button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px #00d4ff;
 }
 
-.message{
-    text-align:center;
-    color:#ef4444;
-    margin-bottom:15px;
-    font-weight:bold;
+.message {
+    text-align: center;
+    color: #ef4444;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
-.register-link{
-    text-align:center;
-    margin-top:20px;
-    color:white;
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
 }
 
-.register-link a{
-    color:#00d4ff;
-    text-decoration:none;
-    font-weight:bold;
+.register-link a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.register-link a:hover{
-    text-decoration:underline;
+.register-link a:hover {
+    text-decoration: underline;
 }
 
-.forgot-password{
-    text-align:right;
-    margin-top:8px;
+.forgot-password {
+    text-align: right;
+    margin-top: 8px;
 }
 
-.forgot-password a{
-    color:#00d4ff;
-    text-decoration:none;
-    font-size:14px;
+.forgot-password a {
+    color: #00d4ff;
+    text-decoration: none;
+    font-size: 14px;
 }
 
-.forgot-password a:hover{
-    text-decoration:underline;
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.admin-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #00d4ff;
+    color: black;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
 }

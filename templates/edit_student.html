@@ -1,126 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Student</title>
 
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
 
-        body{
-            background: linear-gradient(135deg,#0f172a,#1e293b);
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .container{
-            width:500px;
-            background:rgba(255,255,255,0.08);
-            -webkit-backdrop-filter:blur(10px);
-            backdrop-filter:blur(10px);
-            padding:30px;
-            border-radius:15px;
-            box-shadow:0 0 20px rgba(0,255,255,0.2);
+        .container {
+            width: 500px;
+            background: rgba(255, 255, 255, 0.08);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
         }
 
-        h2{
-            text-align:center;
-            color:#00e5ff;
-            margin-bottom:25px;
+        h2 {
+            text-align: center;
+            color: #00e5ff;
+            margin-bottom: 25px;
         }
 
-        label{
-            color:white;
-            font-weight:bold;
-            display:block;
-            margin-bottom:6px;
+        label {
+            color: white;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
         }
 
-        input{
-            width:100%;
-            padding:12px;
-            margin-bottom:15px;
-            border:none;
-            border-radius:8px;
-            outline:none;
-            font-size:15px;
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
         }
 
-        input:focus{
-            box-shadow:0 0 10px #00e5ff;
+        input:focus {
+            box-shadow: 0 0 10px #00e5ff;
         }
 
-        button{
-            width:100%;
-            padding:12px;
-            border:none;
-            border-radius:8px;
-            background:#00e5ff;
-            color:#000;
-            font-size:16px;
-            font-weight:bold;
-            cursor:pointer;
-            transition:0.3s;
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #00e5ff;
+            color: #000;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
-        button:hover{
-            background:#00bcd4;
-            transform:scale(1.03);
+        button:hover {
+            background: #00bcd4;
+            transform: scale(1.03);
         }
 
-        .back-btn{
-            display:block;
-            text-align:center;
-            margin-top:15px;
-            color:#00e5ff;
-            text-decoration:none;
-            font-weight:bold;
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #00e5ff;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        .back-btn:hover{
-            text-decoration:underline;
+        .back-btn:hover {
+            text-decoration: underline;
         }
     </style>
 
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h2>Edit Student</h2>
+        <h2>Edit Student</h2>
 
-    <form method="POST">
+        <form method="POST">
 
-        <label for="name">Name</label>
-        <input id="name" type="text" name="name" value="{{ student[1] }}" title="Student name" placeholder="Enter full name" required>
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" value="{{ student[1] }}" title="Student name"
+                placeholder="Enter full name" required>
 
-        <label for="registration_no">Registration No</label>
-        <input id="registration_no" type="text" name="registration_no" value="{{ student[2] }}" title="Registration number" placeholder="Enter registration number" required>
+            <label for="registration_no">Registration No</label>
+            <input id="registration_no" type="text" name="registration_no" value="{{ student[2] }}"
+                title="Registration number" placeholder="Enter registration number" required>
 
-        <label for="contact">Contact</label>
-        <input id="contact" type="text" name="contact" value="{{ student[3] }}" title="Contact number" placeholder="Enter contact number" required>
+            <label for="contact">Contact</label>
+            <input id="contact" type="text" name="contact" value="{{ student[3] }}" title="Contact number"
+                placeholder="Enter contact number" required>
 
-        <label for="branch">Branch</label>
-        <input id="branch" type="text" name="branch" value="{{ student[4] }}" title="Branch or department" placeholder="Enter branch or department" required>
+            <label for="branch">Branch</label>
+            <input id="branch" type="text" name="branch" value="{{ student[4] }}" title="Branch or department"
+                placeholder="Enter branch or department" required>
 
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" value="{{ student[5] }}" title="Email address" placeholder="Enter email address" required>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="{{ student[5] }}" title="Email address"
+                placeholder="Enter email address" required>
 
-        <button type="submit">Update Student</button>
+            <button type="submit">Update Student</button>
 
-    </form>
+        </form>
 
-    <a href="/admin" class="back-btn">⬅ Back to Dashboard</a>
+        <a href="/admin" class="back-btn">⬅ Back to Dashboard</a>
 
-</div>
+    </div>
 
 </body>
+
 </html>

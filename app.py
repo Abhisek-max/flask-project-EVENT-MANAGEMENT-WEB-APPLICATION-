@@ -5,12 +5,14 @@ import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.secret_key = 'smart_college_secret_key'
+app.secret_key = "smart_college_secret_key"
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+
 
 # ---------- DATABASE INIT ----------
 def init_db():
@@ -54,7 +56,6 @@ def init_db():
         )
     """)
 
-    
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS registrations (
              id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -62,7 +63,6 @@ def init_db():
              event_id INTEGER
         )
     """)
-
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS admin (
@@ -77,10 +77,9 @@ def init_db():
         VALUES ('admin@gmail.com', 'admin123')
    """)
 
-
-
     conn.commit()
     conn.close()
+
 
 init_db()
 
@@ -118,11 +117,7 @@ def admin():
 
     conn.close()
 
-    return render_template(
-        "admin_dashboard.html",
-        events=events,
-        students=students
-    )
+    return render_template("admin_dashboard.html", events=events, students=students)
 
 
 @app.route("/admin_logout")
@@ -160,40 +155,27 @@ def register():
         confirm_password = request.form.get("confirm_password")
 
         if password != confirm_password:
-            return render_template(
-                "register.html",
-                message="Passwords do not match!"
-            )
+            return render_template("register.html", message="Passwords do not match!")
 
         conn = sqlite3.connect("events.db")
         cursor = conn.cursor()
 
         try:
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO students
                 (name, registration_no, contact, branch, email, password)
                 VALUES (?, ?, ?, ?, ?, ?)
-            """, (
-                name,
-                registration_no,
-                contact,
-                branch,
-                email,
-                password
-            ))
+            """,
+                (name, registration_no, contact, branch, email, password),
+            )
 
             conn.commit()
 
-            return render_template(
-                "register.html",
-                message="Registration Successful!"
-            )
+            return render_template("register.html", message="Registration Successful!")
 
         except sqlite3.IntegrityError:
-            return render_template(
-                "register.html",
-                message="Email Already Exists!"
-            )
+            return render_template("register.html", message="Email Already Exists!")
 
         finally:
             conn.close()
@@ -202,39 +184,42 @@ def register():
 
 
 # ---------- EDIT STUDENT ----------
-@app.route('/edit_student/<int:id>', methods=['GET', 'POST'])
+@app.route("/edit_student/<int:id>", methods=["GET", "POST"])
 def edit_student(id):
-    conn = sqlite3.connect('events.db')
+    conn = sqlite3.connect("events.db")
     c = conn.cursor()
 
-    if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        registration_no = request.form['registration_no']
-        contact = request.form['contact']
-        branch = request.form['branch']
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        registration_no = request.form["registration_no"]
+        contact = request.form["contact"]
+        branch = request.form["branch"]
 
-        c.execute("""
+        c.execute(
+            """
             UPDATE students
             SET name=?, email=?, registration_no=?, contact=?, branch=?
             WHERE id=?
-        """, (name, email, registration_no, contact, branch, id))
+        """,
+            (name, email, registration_no, contact, branch, id),
+        )
 
         conn.commit()
         conn.close()
-        return redirect('/admin')
+        return redirect("/admin")
 
     c.execute("SELECT * FROM students WHERE id=?", (id,))
     student = c.fetchone()
     conn.close()
 
-    return render_template('edit_student.html', student=student)
+    return render_template("edit_student.html", student=student)
 
 
 # ---------- DELETE STUDENT ----------
-@app.route('/delete_student/<int:id>')
+@app.route("/delete_student/<int:id>")
 def delete_student(id):
-    conn = sqlite3.connect('events.db')
+    conn = sqlite3.connect("events.db")
     c = conn.cursor()
 
     c.execute("DELETE FROM students WHERE id=?", (id,))
@@ -242,12 +227,11 @@ def delete_student(id):
     conn.commit()
     conn.close()
 
-    return redirect('/admin')
+    return redirect("/admin")
 
 
-    
+
 # ---------- LOGIN EVENT ----------
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -260,8 +244,7 @@ def login():
         cursor = conn.cursor()
 
         cursor.execute(
-            "SELECT * FROM students WHERE email=? AND password=?",
-            (email, password)
+            "SELECT * FROM students WHERE email=? AND password=?", (email, password)
         )
 
         user = cursor.fetchone()
@@ -275,18 +258,18 @@ def login():
             return redirect("/")
 
         else:
-            return render_template(
-                "login.html",
-                message="Invalid Email or Password!"
-            )
+            return render_template("login.html", message="Invalid Email or Password!")
 
     return render_template("login.html")
+
+
 
 # ---------- LOGOUT ----------
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/login")
+
 
 
 # ---------- ADD EVENT ----------
@@ -305,15 +288,23 @@ def add_event():
         conn = sqlite3.connect("events.db")
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO events (
                 event_name, event_date, event_time,
                 venue, guest_speaker, event_goal, description
             ) VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (
-            event_name, event_date, event_time,
-            venue, guest_speaker, event_goal, description
-        ))
+        """,
+            (
+                event_name,
+                event_date,
+                event_time,
+                venue,
+                guest_speaker,
+                event_goal,
+                description,
+            ),
+        )
 
         conn.commit()
         conn.close()
@@ -321,6 +312,7 @@ def add_event():
         return redirect(url_for("admin"))
 
     return render_template("add_event.html")
+
 
 
 # ---------- DELETE EVENT ----------
@@ -335,6 +327,7 @@ def delete_event(id):
     conn.close()
 
     return redirect(url_for("admin"))
+
 
 
 # ---------- EDIT EVENT ----------
@@ -353,15 +346,24 @@ def edit_event(id):
         event_goal = request.form.get("event_goal")
         description = request.form.get("description")
 
-        cursor.execute("""
+        cursor.execute(
+            """
             UPDATE events SET
             event_name=?, event_date=?, event_time=?,
             venue=?, guest_speaker=?, event_goal=?, description=?
             WHERE id=?
-        """, (
-            event_name, event_date, event_time,
-            venue, guest_speaker, event_goal, description, id
-        ))
+        """,
+            (
+                event_name,
+                event_date,
+                event_time,
+                venue,
+                guest_speaker,
+                event_goal,
+                description,
+                id,
+            ),
+        )
 
         conn.commit()
         conn.close()
@@ -373,6 +375,7 @@ def edit_event(id):
     conn.close()
 
     return render_template("edit_event.html", event=event)
+
 
 
 # ---------- UPDATE DATABASE ----------
@@ -392,6 +395,8 @@ def update_db():
         return "Column Already Exists!"
     finally:
         conn.close()
+
+
 
 # ---------- PROFILE EVENT ----------
 @app.route("/profile")
@@ -429,7 +434,8 @@ def edit_profile():
         branch = request.form["branch"]
         email = request.form["email"]
 
-        cursor.execute("""
+        cursor.execute(
+            """
             UPDATE students
             SET
                 name=?,
@@ -438,14 +444,9 @@ def edit_profile():
                 branch=?,
                 email=?
             WHERE id=?
-        """, (
-            name,
-            registration_no,
-            contact,
-            branch,
-            email,
-            session["user_id"]
-        ))
+        """,
+            (name, registration_no, contact, branch, email, session["user_id"]),
+        )
 
         conn.commit()
 
@@ -455,19 +456,14 @@ def edit_profile():
 
         return redirect("/profile")
 
-    cursor.execute(
-        "SELECT * FROM students WHERE id=?",
-        (session["user_id"],)
-    )
+    cursor.execute("SELECT * FROM students WHERE id=?", (session["user_id"],))
 
     user = cursor.fetchone()
 
     conn.close()
 
-    return render_template(
-        "edit_profile.html",
-        user=user
-    )
+    return render_template("edit_profile.html", user=user)
+
 
 
 # ---------- UPLOAD PROFILE PHOTO EVENT ----------
@@ -483,32 +479,30 @@ def upload_profile_photo():
 
         filename = secure_filename(file.filename)
 
-        filepath = os.path.join(
-            app.config["UPLOAD_FOLDER"],
-            filename
-        )
+        filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
 
         file.save(filepath)
 
         conn = sqlite3.connect("events.db")
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             UPDATE students
             SET profile_image=?
             WHERE id=?
-        """, (
-            filename,
-            session["user_id"]
-        ))
+        """,
+            (filename, session["user_id"]),
+        )
 
         conn.commit()
         conn.close()
 
     return redirect("/profile")
 
-# ---------- REMOVE PROFILE PHOTO EVENT ----------
 
+
+# ---------- REMOVE PROFILE PHOTO EVENT ----------
 @app.route("/remove_profile_photo", methods=["POST"])
 def remove_profile_photo():
 
@@ -519,27 +513,26 @@ def remove_profile_photo():
     cursor = conn.cursor()
 
     cursor.execute(
-        "SELECT profile_image FROM students WHERE id=?",
-        (session["user_id"],)
+        "SELECT profile_image FROM students WHERE id=?", (session["user_id"],)
     )
 
     photo = cursor.fetchone()
 
     if photo and photo[0]:
 
-        filepath = os.path.join(
-            app.config["UPLOAD_FOLDER"],
-            photo[0]
-        )
+        filepath = os.path.join(app.config["UPLOAD_FOLDER"], photo[0])
 
         if os.path.exists(filepath):
             os.remove(filepath)
 
-        cursor.execute("""
+        cursor.execute(
+            """
             UPDATE students
             SET profile_image=NULL
             WHERE id=?
-        """, (session["user_id"],))
+        """,
+            (session["user_id"],),
+        )
 
         conn.commit()
 
@@ -548,8 +541,8 @@ def remove_profile_photo():
     return redirect("/profile")
 
 
-# ---------- CHANGE PASSWORD EVENT ----------
 
+# ---------- CHANGE PASSWORD EVENT ----------
 @app.route("/change_password", methods=["GET", "POST"])
 def change_password():
 
@@ -566,8 +559,7 @@ def change_password():
         cursor = conn.cursor()
 
         cursor.execute(
-            "SELECT password FROM students WHERE id=?",
-            (session["user_id"],)
+            "SELECT password FROM students WHERE id=?", (session["user_id"],)
         )
 
         user = cursor.fetchone()
@@ -575,35 +567,32 @@ def change_password():
         if user[0] != current_password:
             conn.close()
             return render_template(
-                "change_password.html",
-                message="Current Password Incorrect!"
+                "change_password.html", message="Current Password Incorrect!"
             )
 
         if new_password != confirm_password:
             conn.close()
             return render_template(
-                "change_password.html",
-                message="Passwords Do Not Match!"
+                "change_password.html", message="Passwords Do Not Match!"
             )
 
         cursor.execute(
             "UPDATE students SET password=? WHERE id=?",
-            (new_password, session["user_id"])
+            (new_password, session["user_id"]),
         )
 
         conn.commit()
         conn.close()
 
         return render_template(
-            "change_password.html",
-            message="Password Updated Successfully!"
+            "change_password.html", message="Password Updated Successfully!"
         )
 
     return render_template("change_password.html")
 
 
-# ---------- FORGOT PASSWORD EVENT ----------
 
+# ---------- FORGOT PASSWORD EVENT ----------
 @app.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
 
@@ -615,38 +604,29 @@ def forgot_password():
 
         if new_password != confirm_password:
             return render_template(
-                "forgot_password.html",
-                message="Passwords do not match!"
+                "forgot_password.html", message="Passwords do not match!"
             )
 
         conn = sqlite3.connect("events.db")
         cursor = conn.cursor()
 
-        cursor.execute(
-            "SELECT * FROM students WHERE email=?",
-            (email,)
-        )
+        cursor.execute("SELECT * FROM students WHERE email=?", (email,))
 
         user = cursor.fetchone()
 
         if not user:
             conn.close()
-            return render_template(
-                "forgot_password.html",
-                message="Email not found!"
-            )
+            return render_template("forgot_password.html", message="Email not found!")
 
         cursor.execute(
-            "UPDATE students SET password=? WHERE email=?",
-            (new_password, email)
+            "UPDATE students SET password=? WHERE email=?", (new_password, email)
         )
 
         conn.commit()
         conn.close()
 
         return render_template(
-            "forgot_password.html",
-            message="Password Reset Successful!"
+            "forgot_password.html", message="Password Reset Successful!"
         )
 
     return render_template("forgot_password.html")
@@ -654,7 +634,6 @@ def forgot_password():
 
 
 # ---------- JOIN EVENT ----------
-
 @app.route("/join_event/<int:event_id>")
 def join_event(event_id):
 
@@ -664,14 +643,14 @@ def join_event(event_id):
     conn = sqlite3.connect("events.db")
     cursor = conn.cursor()
 
-    cursor.execute("""
+    cursor.execute(
+        """
         SELECT *
         FROM registrations
         WHERE student_id=? AND event_id=?
-    """, (
-        session["user_id"],
-        event_id
-    ))
+    """,
+        (session["user_id"], event_id),
+    )
 
     existing = cursor.fetchone()
 
@@ -679,14 +658,14 @@ def join_event(event_id):
         conn.close()
         return "You have already joined this event!"
 
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT INTO registrations
         (student_id, event_id)
         VALUES (?, ?)
-    """, (
-        session["user_id"],
-        event_id
-    ))
+    """,
+        (session["user_id"], event_id),
+    )
 
     conn.commit()
     conn.close()
@@ -696,7 +675,6 @@ def join_event(event_id):
 
 
 # ---------- MY EVENTS ----------
-
 @app.route("/my_events")
 def my_events():
 
@@ -706,26 +684,26 @@ def my_events():
     conn = sqlite3.connect("events.db")
     cursor = conn.cursor()
 
-    cursor.execute("""
+    cursor.execute(
+        """
         SELECT events.*
         FROM events
         JOIN registrations
         ON events.id = registrations.event_id
         WHERE registrations.student_id = ?
-    """, (session["user_id"],))
+    """,
+        (session["user_id"],),
+    )
 
     events = cursor.fetchall()
 
     conn.close()
 
-    return render_template(
-        "my_events.html",
-        events=events
-    )
+    return render_template("my_events.html", events=events)
 
 
-#---------- CLEAR REGISTRATIONS ----------
 
+# ---------- CLEAR REGISTRATIONS ----------
 @app.route("/clear_registrations")
 def clear_registrations():
 
@@ -749,14 +727,12 @@ def participants(event_id):
     cursor = conn.cursor()
 
     # Event Name
-    cursor.execute(
-        "SELECT event_name FROM events WHERE id=?",
-        (event_id,)
-    )
+    cursor.execute("SELECT event_name FROM events WHERE id=?", (event_id,))
     event = cursor.fetchone()
 
     # Registered Students
-    cursor.execute("""
+    cursor.execute(
+        """
         SELECT students.name,
                students.registration_no,
                students.branch,
@@ -765,21 +741,20 @@ def participants(event_id):
         JOIN students
         ON registrations.student_id = students.id
         WHERE registrations.event_id = ?
-    """, (event_id,))
+    """,
+        (event_id,),
+    )
 
     participants = cursor.fetchall()
 
     conn.close()
 
-    return render_template(
-        "participants.html",
-        participants=participants,
-        event=event
-    )
+    return render_template("participants.html", participants=participants, event=event)
+
+
 
 # ---------- API: EVENT COUNTS ----------
-
-@app.route('/api/event_counts')
+@app.route("/api/event_counts")
 def event_counts():
     conn = sqlite3.connect("events.db")
     cursor = conn.cursor()
@@ -796,6 +771,7 @@ def event_counts():
     return {row[0]: row[1] for row in rows}
 
 
+
 # ---------- ADMIN LOGIN ----------
 @app.route("/admin_login", methods=["GET", "POST"])
 def admin_login():
@@ -807,10 +783,13 @@ def admin_login():
         conn = sqlite3.connect("events.db")
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             SELECT * FROM admin
             WHERE email=? AND password=?
-        """, (email, password))
+        """,
+            (email, password),
+        )
 
         admin = cursor.fetchone()
         conn.close()
@@ -822,6 +801,31 @@ def admin_login():
             return render_template("admin_login.html", message="Invalid credentials")
 
     return render_template("admin_login.html")
+
+
+
+# ---------- LEAVE EVENT ----------
+@app.route("/leave_event/<int:event_id>")
+def leave_event(event_id):
+
+    if "user_id" not in session:
+        return redirect("/login")
+
+    conn = sqlite3.connect("events.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        DELETE FROM registrations
+        WHERE student_id=? AND event_id=?
+    """,
+        (session["user_id"], event_id),
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/my_events")
 
 
 # ---------- RUN ----------

@@ -1,326 +1,326 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Eventify</title>
 
-<style>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            min-height: 100vh;
+            color: white;
+        }
 
-    body{
-        margin:0;
-        font-family:'Segoe UI',sans-serif;
-        background:linear-gradient(135deg,#0f172a,#1e293b);
-        min-height:100vh;
-        color:white;
-    }
+        .header {
+            text-align: center;
+            padding: 25px;
+        }
 
-    .header{
-        text-align:center;
-        padding:25px;
-    }
+        .header h1 {
+            color: #00d4ff;
+            margin: 0;
+            font-size: 38px;
+        }
 
-    .header h1{
-        color:#00d4ff;
-        margin:0;
-        font-size:38px;
-    }
+        .header h1::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #00d4ff;
+            margin: 10px auto;
+            border-radius: 5px;
+        }
 
-    .header h1::after{
-        content:"";
-        display:block;
-        width:100px;
-        height:4px;
-        background:#00d4ff;
-        margin:10px auto;
-        border-radius:5px;
-    }
+        .container {
+            padding: 30px;
+        }
 
-    .container{
-        padding:30px;
-    }
+        .table-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            padding: 20px;
+            overflow-x: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
 
-    .table-card{
-        background:rgba(255,255,255,0.08);
-        -webkit-backdrop-filter:blur(12px);
-        backdrop-filter:blur(12px);
-        border:1px solid rgba(255,255,255,0.1);
-        border-radius:18px;
-        padding:20px;
-        overflow-x:auto;
-        box-shadow:0 10px 25px rgba(0,0,0,0.3);
-        margin-bottom:30px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    table{
-        width:100%;
-        border-collapse:collapse;
-    }
+        th {
+            background: #00d4ff;
+            color: black;
+            padding: 14px;
+            font-size: 14px;
+        }
 
-    th{
-        background:#00d4ff;
-        color:black;
-        padding:14px;
-        font-size:14px;
-    }
+        td {
+            padding: 14px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    td{
-        padding:14px;
-        text-align:center;
-        border-bottom:1px solid rgba(255,255,255,0.1);
-    }
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
 
-    tr:hover{
-        background:rgba(255,255,255,0.05);
-    }
+        .btn {
+            display: inline-block;
+            min-width: 90px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-   .btn{
-    display:inline-block;
-    min-width:90px;
-    padding:8px 12px;
-    border-radius:8px;
-    text-decoration:none;
-    text-align:center;
-    color:white;
-    font-size:13px;
-    font-weight:bold;
-    transition:0.3s;
-}
+        .edit {
+            background: #22c55e;
+        }
 
-    .edit{
-        background:#22c55e;
-    }
+        .delete {
+            background: #ef4444;
+        }
 
-    .delete{
-        background:#ef4444;
-    }
+        .edit:hover {
+            box-shadow: 0 0 12px #22c55e;
+        }
 
-    .edit:hover{
-        box-shadow:0 0 12px #22c55e;
-    }
+        .delete:hover {
+            box-shadow: 0 0 12px #ef4444;
+        }
 
-    .delete:hover{
-        box-shadow:0 0 12px #ef4444;
-    }
+        .top-links {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    .top-links{
-        text-align:center;
-        margin-bottom:20px;
-    }
+        .top-links a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 18px;
+            background: #00d4ff;
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-    .top-links a{
-        display:inline-block;
-        margin:0 10px;
-        padding:10px 18px;
-        background:#00d4ff;
-        color:black;
-        text-decoration:none;
-        border-radius:8px;
-        font-weight:bold;
-        transition:0.3s;
-    }
+        .top-links a:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00d4ff;
+        }
 
-    .top-links a:hover{
-        transform:scale(1.05);
-        box-shadow:0 0 15px #00d4ff;
-    }
+        .section-title {
+            text-align: center;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
 
-    .section-title{
-        text-align:center;
-        color:#00d4ff;
-        margin-bottom:15px;
-    }
-
-    .action-buttons{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
 
 
-    .participants{
-    background:#00d4ff;
-    color:black;
-}
+            .participants {
+                background: #00d4ff;
+                color: black;
+            }
 
-.participants:hover{
-    box-shadow:0 0 12px #00d4ff;
-}
+            .participants:hover {
+                box-shadow: 0 0 12px #00d4ff;
+            }
 
-.action-buttons{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:8px;
-    flex-wrap:wrap;
-}
+            .action-buttons {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
 
-th:last-child,
-td:last-child{
-    min-width:280px;
-}
+            th:last-child,
+            td:last-child {
+                min-width: 280px;
+            }
 
-.logout-btn{
-    background:#ef4444;
-    color:white;
-    padding:10px 15px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:bold;
-}
-.logout-btn:hover{
-    box-shadow:0 0 12px #ef4444;
-}
+            .logout-btn {
+                background: #ef4444;
+                color: white;
+                padding: 10px 15px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+            }
 
-}
+            .logout-btn:hover {
+                box-shadow: 0 0 12px #ef4444;
+            }
 
-</style>
+        }
+    </style>
 
 
 </head>
+
 <body>
 
-<div class="header">
-    <h1>Admin Dashboard</h1>
-</div>
+    <div class="header">
+        <h1>Admin Dashboard</h1>
+    </div>
 
-<div class="top-links">
-    <a href="/">🏠Home</a>
-    <a href="/add_event">➕Add Event</a>
-    <a href="/admin_logout">🚪Logout</a>
-</div>
+    <div class="top-links">
+        <a href="/">🏠Home</a>
+        <a href="/add_event">➕Add Event</a>
+        <a href="/admin_logout">🚪Logout</a>
+    </div>
 
-<div class="container">
+    <div class="container">
 
 
-<!-- EVENTS TABLE -->
+        <!-- EVENTS TABLE -->
 
-<div class="table-card" id="events-table">
+        <div class="table-card" id="events-table">
 
-    <h2 class="section-title">Events Management</h2>
+            <h2 class="section-title">Events Management</h2>
 
-    <table>
+            <table>
 
-       <tr>
-    <th>ID</th>
-    <th>Event Name</th>
-    <th>Date</th>
-    <th>Time</th>
-    <th>Venue</th>
-    <th>Speaker</th>
-    <th>Goal</th>
-    <th>Description</th>
-    <th>Registrations</th>
-    <th>Actions</th>
-</tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Event Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Venue</th>
+                    <th>Speaker</th>
+                    <th>Goal</th>
+                    <th>Description</th>
+                    <th>Registrations</th>
+                    <th>Actions</th>
+                </tr>
 
-         {% for event in events %}
-<tr>
+                {% for event in events %}
+                <tr>
 
-    <td>{{ loop.index }}</td>
-    <td>{{ event[1] }}</td>
-    <td>{{ event[2] }}</td>
-    <td>{{ event[3] }}</td>
-    <td>{{ event[4] }}</td>
-    <td>{{ event[5] }}</td>
-    <td>{{ event[6] }}</td>
-    <td>{{ event[7] }}</td>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ event[1] }}</td>
+                    <td>{{ event[2] }}</td>
+                    <td>{{ event[3] }}</td>
+                    <td>{{ event[4] }}</td>
+                    <td>{{ event[5] }}</td>
+                    <td>{{ event[6] }}</td>
+                    <td>{{ event[7] }}</td>
 
-    <td id="count-{{ event[0] }}">
-        👥 0 Registered
-    </td>
+                    <td id="count-{{ event[0] }}">
+                        👥 0 Registered
+                    </td>
 
-    <td>
-        <div class="action-buttons">
+                    <td>
+                        <div class="action-buttons">
 
-            <a href="/edit_event/{{ event[0] }}" class="btn edit">Edit</a>
+                            <a href="/edit_event/{{ event[0] }}" class="btn edit">Edit</a>
 
-            <a href="/delete_event/{{ event[0] }}" class="btn delete"
-               onclick="return confirm('Delete this event?')">
-               Delete
-            </a>
+                            <a href="/delete_event/{{ event[0] }}" class="btn delete"
+                                onclick="return confirm('Delete this event?')">
+                                Delete
+                            </a>
 
-            <a href="/participants/{{ event[0] }}" class="btn participants">
-               Participants
-            </a>
+                            <a href="/participants/{{ event[0] }}" class="btn participants">
+                                Participants
+                            </a>
+
+                        </div>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </table>
 
         </div>
-    </td>
-
-</tr>
-{% endfor %}
-    </table>
-
-</div>
 
 
-<!-- STUDENTS TABLE -->
+        <!-- STUDENTS TABLE -->
 
-<div class="table-card" id="students-table">
+        <div class="table-card" id="students-table">
 
-    <h2 class="section-title">Registered Students</h2>
+            <h2 class="section-title">Registered Students</h2>
 
-    <table>
+            <table>
 
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Registration No</th>
-            <th>Contact</th>
-            <th>Branch</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Registration No</th>
+                    <th>Contact</th>
+                    <th>Branch</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
 
-        {% for student in students %}
-        <tr>
+                {% for student in students %}
+                <tr>
 
-            <td>{{ loop.index }}</td>
-            <td>{{ student[1] }}</td>
-            <td>{{ student[2] }}</td>
-            <td>{{ student[3] }}</td>
-            <td>{{ student[4] }}</td>
-            <td>{{ student[5] }}</td>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[2] }}</td>
+                    <td>{{ student[3] }}</td>
+                    <td>{{ student[4] }}</td>
+                    <td>{{ student[5] }}</td>
 
-            <td>
-                <a class="btn edit"
-                   href="/edit_student/{{ student[0] }}">
-                   Edit
-                </a>
+                    <td>
+                        <a class="btn edit" href="/edit_student/{{ student[0] }}">
+                            Edit
+                        </a>
 
-                <a class="btn delete"
-                   href="/delete_student/{{ student[0] }}"
-                   onclick="return confirm('Delete this student?')">
-                   Delete
-                </a>
-            </td>
+                        <a class="btn delete" href="/delete_student/{{ student[0] }}"
+                            onclick="return confirm('Delete this student?')">
+                            Delete
+                        </a>
+                    </td>
 
-        </tr>
-        {% endfor %}
+                </tr>
+                {% endfor %}
 
-    </table>
+            </table>
 
-</div>
+        </div>
 
 
-</div>
+    </div>
 
 
 
-<script>
-setInterval(async () => {
-    let res = await fetch("/api/event_counts");
-    let data = await res.json();
+    <script>
+        setInterval(async () => {
+            let res = await fetch("/api/event_counts");
+            let data = await res.json();
 
-    for (let id in data) {
-        let el = document.getElementById("count-" + id);
-        if (el) {
-            el.innerText = "👥 " + data[id] + " Registered";
-        }
-    }
-}, 3000);
-</script>
+            for (let id in data) {
+                let el = document.getElementById("count-" + id);
+                if (el) {
+                    el.innerText = "👥 " + data[id] + " Registered";
+                }
+            }
+        }, 3000);
+    </script>
 
 </body>
+
 </html>

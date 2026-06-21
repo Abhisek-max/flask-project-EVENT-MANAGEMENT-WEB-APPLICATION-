@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,69 +9,50 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
 </head>
+
 <body>
 
-<div class="register-container">
+    <div class="register-container">
 
-    <div class="register-card">
+        <div class="register-card">
 
-        <h1>User Registration</h1>
+            <h1>User Registration</h1>
 
-        {% if message %}
+            {% if message %}
             <p class="message">{{ message }}</p>
-        {% endif %}
+            {% endif %}
 
-        <form method="POST">
+            <form method="POST">
 
-            <input type="text"
-                   name="name"
-                   placeholder="Full Name"
-                   required>
+                <input type="text" name="name" placeholder="Full Name" required>
 
-            <input type="integer"
-                   name="registration_no"
-                   placeholder="Registration Number"
-                   required>
+                <input type="integer" name="registration_no" placeholder="Registration Number" required>
 
-            <input type="text"
-                   name="contact"
-                   placeholder="Contact Number"
-                   required>
+                <input type="text" name="contact" placeholder="Contact Number" required>
 
-            <input type="text"
-                   name="branch"
-                   placeholder="Branch"
-                   required>
+                <input type="text" name="branch" placeholder="Branch" required>
 
-            <input type="email"
-                   name="email"
-                   placeholder="Email Address"
-                   required>
+                <input type="email" name="email" placeholder="Email Address" required>
 
-            <input type="password"
-                   name="password"
-                   placeholder="Password"
-                   required>
+                <input type="password" name="password" placeholder="Password" required>
 
-            <input type="password"
-                   name="confirm_password"
-                   placeholder="Confirm Password"
-                   required>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
 
-            <button type="submit">
-                Register
-            </button>
+                <button type="submit">
+                    Register
+                </button>
 
-        </form>
+            </form>
 
-        <p class="login-link">
-            Already have an account?
-            <a href="/login">Login</a>
-        </p>
+            <p class="login-link">
+                Already have an account?
+                <a href="/login">Login</a>
+            </p>
+
+        </div>
 
     </div>
 
-</div>
-
 </body>
+
 </html>

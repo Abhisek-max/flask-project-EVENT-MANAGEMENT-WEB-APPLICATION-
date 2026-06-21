@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!-- Viewport meta belongs in the head -->
@@ -7,180 +8,142 @@
     <title>Edit Event</title>
 
     <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Segoe UI',sans-serif;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        body{
-            min-height:100vh;
-            background:linear-gradient(135deg,#0f172a,#1e293b);
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            padding:30px;
-            color:white;
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            color: white;
         }
 
-        .form-card{
-            width:100%;
-            max-width:700px;
-            background:rgba(255,255,255,0.08);
-            -webkit-backdrop-filter:blur(12px);
-            backdrop-filter:blur(12px);
-            border:1px solid rgba(255,255,255,0.1);
-            border-radius:18px;
-            padding:30px;
-            box-shadow:0 10px 25px rgba(0,0,0,0.3);
+        .form-card {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.08);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        h2{
-            text-align:center;
-            color:#00d4ff;
-            margin-bottom:25px;
-            font-size:32px;
+        h2 {
+            text-align: center;
+            color: #00d4ff;
+            margin-bottom: 25px;
+            font-size: 32px;
         }
 
-        label{
-            display:block;
-            margin-bottom:6px;
-            font-weight:bold;
-            color:#e2e8f0;
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #e2e8f0;
         }
 
         input,
-        textarea{
-            width:100%;
-            padding:12px;
-            border:none;
-            border-radius:10px;
-            margin-bottom:15px;
-            background:rgba(255,255,255,0.95);
-            font-size:15px;
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            font-size: 15px;
         }
 
         input:focus,
-        textarea:focus{
-            outline:none;
-            box-shadow:0 0 12px #00d4ff;
+        textarea:focus {
+            outline: none;
+            box-shadow: 0 0 12px #00d4ff;
         }
 
-        textarea{
-            min-height:120px;
-            resize:vertical;
+        textarea {
+            min-height: 120px;
+            resize: vertical;
         }
 
-        button{
-            width:100%;
-            padding:14px;
-            border:none;
-            border-radius:10px;
-            background:#00d4ff;
-            color:black;
-            font-size:16px;
-            font-weight:bold;
-            cursor:pointer;
-            transition:.3s;
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #00d4ff;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
         }
 
-        button:hover{
-            transform:scale(1.02);
-            box-shadow:0 0 15px #00d4ff;
+        button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px #00d4ff;
         }
 
-        .back-btn{
-            display:block;
-            text-align:center;
-            margin-top:15px;
-            color:#00d4ff;
-            text-decoration:none;
-            font-weight:bold;
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        .back-btn:hover{
-            text-decoration:underline;
+        .back-btn:hover {
+            text-decoration: underline;
         }
-
     </style>
 
 </head>
+
 <body>
 
-<div class="form-card">
+    <div class="form-card">
 
-    <h2>Edit Event</h2>
+        <h2>Edit Event</h2>
 
-    <form method="POST">
+        <form method="POST">
 
-        <label for="event_name">Event Name</label>
-        <input
-            id="event_name"
-            name="event_name"
-            placeholder="Enter event name"
-            value="{{ event[1] }}"
-            required
-        >
+            <label for="event_name">Event Name</label>
+            <input id="event_name" name="event_name" placeholder="Enter event name" value="{{ event[1] }}" required>
 
-        <label for="event_date">Event Date</label>
-        <input
-            type="date"
-            id="event_date"
-            name="event_date"
-            value="{{ event[2] }}"
-            required
-        >
+            <label for="event_date">Event Date</label>
+            <input type="date" id="event_date" name="event_date" value="{{ event[2] }}" required>
 
-        <label for="event_time">Event Time</label>
-        <input
-            type="time"
-            id="event_time"
-            name="event_time"
-            value="{{ event[3] }}"
-            required
-        >
+            <label for="event_time">Event Time</label>
+            <input type="time" id="event_time" name="event_time" value="{{ event[3] }}" required>
 
-        <label for="venue">Venue</label>
-        <input
-            id="venue"
-            name="venue"
-            placeholder="Enter venue"
-            value="{{ event[4] }}"
-            required
-        >
+            <label for="venue">Venue</label>
+            <input id="venue" name="venue" placeholder="Enter venue" value="{{ event[4] }}" required>
 
-        <label for="guest_speaker">Guest Speaker</label>
-        <input
-            id="guest_speaker"
-            name="guest_speaker"
-            placeholder="Enter guest speaker"
-            value="{{ event[5] }}"
-        >
+            <label for="guest_speaker">Guest Speaker</label>
+            <input id="guest_speaker" name="guest_speaker" placeholder="Enter guest speaker" value="{{ event[5] }}">
 
-        <label for="event_goal">Event Goal</label>
-        <input
-            id="event_goal"
-            name="event_goal"
-            placeholder="Enter event goal"
-            value="{{ event[6] }}"
-        >
+            <label for="event_goal">Event Goal</label>
+            <input id="event_goal" name="event_goal" placeholder="Enter event goal" value="{{ event[6] }}">
 
-        <label for="description">Description</label>
-        <textarea
-            id="description"
-            name="description"
-            placeholder="Enter description"
-        >{{ event[7] }}</textarea>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Enter description">{{ event[7] }}</textarea>
 
-        <button type="submit">Update Event</button>
+            <button type="submit">Update Event</button>
 
-    </form>
+        </form>
 
-    <a href="/admin" class="back-btn">⬅ Back to Dashboard</a>
+        <a href="/admin" class="back-btn">⬅ Back to Dashboard</a>
 
-</div>
+    </div>
 
 </body>
+
 </html>

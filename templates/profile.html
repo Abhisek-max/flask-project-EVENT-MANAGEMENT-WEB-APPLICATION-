@@ -1,75 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>My Profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 </head>
+
 <body>
 
 
-<h1 class="profile-title">My Profile</h1>
+    <h1 class="profile-title">My Profile</h1>
 
 
-<div class="profile-card">
+    <div class="profile-card">
 
-    <div class="profile-avatar">
+        <div class="profile-avatar">
+
+            {% if user[7] %}
+            <img src="{{ url_for('static',
+            filename='uploads/' + user[7]) }}" alt="Profile Photo">
+            {% else %}
+            👤
+            {% endif %}
+
+        </div>
+
+        <h2 class="profile-name">{{ user[1] }}</h2>
+
+        <form action="/upload_profile_photo" method="POST" enctype="multipart/form-data">
+
+            <input type="file" name="profile_photo" accept="image/*" required>
+
+            <button type="submit" class="btn">
+                Upload Photo
+            </button>
+
+        </form>
 
         {% if user[7] %}
-            <img src="{{ url_for('static',
-            filename='uploads/' + user[7]) }}"
-            alt="Profile Photo">
-        {% else %}
-            👤
+        <form action="/remove_profile_photo" method="POST">
+            <button type="submit" class="remove-btn">
+                Remove Photo
+            </button>
+        </form>
         {% endif %}
 
+        <div class="profile-info">
+            <p><strong>Registration No:</strong> {{ user[2] }}</p>
+            <p><strong>Contact:</strong> {{ user[3] }}</p>
+            <p><strong>Branch:</strong> {{ user[4] }}</p>
+            <p><strong>Email:</strong> {{ user[5] }}</p>
+        </div>
+
+        <div class="profile-buttons">
+            <a href="/">Home🏠</a>
+            <a href="/edit_profile">Edit Profile✏️</a>
+            <a href="/logout">Logout🚪</a>
+            <a href="/change_password">Change Password🔑</a>
+        </div>
+
     </div>
 
-    <h2 class="profile-name">{{ user[1] }}</h2>
-
-    <form
-        action="/upload_profile_photo"
-        method="POST"
-        enctype="multipart/form-data">
-
-        <input
-            type="file"
-            name="profile_photo"
-            accept="image/*"
-            required>
-
-        <button type="submit" class="btn">
-            Upload Photo
-        </button>
-
-    </form>
-
-     {% if user[7] %}
-    <form action="/remove_profile_photo" method="POST">
-      <button type="submit" class="remove-btn">
-        Remove Photo
-      </button>
-    </form>
-    {% endif %}
-
-    <div class="profile-info">
-        <p><strong>Registration No:</strong> {{ user[2] }}</p>
-        <p><strong>Contact:</strong> {{ user[3] }}</p>
-        <p><strong>Branch:</strong> {{ user[4] }}</p>
-        <p><strong>Email:</strong> {{ user[5] }}</p>
-    </div>
-
-    <div class="profile-buttons">
-        <a href="/">Home🏠</a>
-        <a href="/edit_profile">Edit Profile✏️</a>
-        <a href="/logout">Logout🚪</a>
-        <a href="/change_password">Change Password🔑</a>
-    </div>
-
-</div>
 
 
 
-   
 
 </body>
+
 </html>
