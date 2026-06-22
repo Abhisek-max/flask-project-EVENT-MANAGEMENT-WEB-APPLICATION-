@@ -1,11 +1,17 @@
 import os
 import sqlite3
+from datetime import timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, session  # type: ignore[import]  # pylint: disable=import-error
 from werkzeug.utils import secure_filename  # type: ignore[import]  # pylint: disable=import-error
 
 app = Flask(__name__)
 app.secret_key = "smart_college_secret_key"
+
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
+app.config["SESSION_COOKIE_SECURE"] = True
+app.permanent_session_lifetime = timedelta(days=7)
+
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -250,6 +256,8 @@ def login():
         conn.close()
 
         if user:
+            session.permanent = True
+            
             session["user_id"] = user[0]
             session["user_name"] = user[1]
             session["user_email"] = user[5]
