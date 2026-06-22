@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+import os
 import sqlite3
 
-import os
-from werkzeug.utils import secure_filename
+from flask import Flask, render_template, request, redirect, url_for, session  # type: ignore[import]  # pylint: disable=import-error
+from werkzeug.utils import secure_filename  # type: ignore[import]  # pylint: disable=import-error
 
 app = Flask(__name__)
 app.secret_key = "smart_college_secret_key"

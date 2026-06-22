@@ -7,6 +7,26 @@
     <title>Admin Login - Eventify</title>
 
     <style>
+        a.home-btn {
+            display: inline-block !important;
+            margin-top: 18px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.12) !important;
+            color: white !important;
+            text-decoration: none !important;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        a.home-btn:hover {
+            background: #00d4ff !important;
+            color: black !important;
+            box-shadow: 0 0 12px #00d4ff;
+            transform: translateY(-2px);
+        }
+
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
@@ -79,22 +99,25 @@
             font-size: 14px;
         }
 
-        @media (max-width:768px){
+        @media (max-width:768px) {
 
-    .login-card{
-        width:90%;
-        padding:25px;
-    }
+            .login-box {
+                width: 90%;
+                padding: 25px;
+            }
 
-    .login-card h1{
-        font-size:28px;
-    }
+            .login-card h1 {
+                font-size: 28px;
+            }
 
-    body{
-        padding:15px;
-        box-sizing:border-box;
-    }
-}
+            body {
+                padding: 15px;
+                box-sizing: border-box;
+            }
+
+
+
+        }
     </style>
 
 </head>
@@ -114,6 +137,11 @@
             <button type="submit">Login</button>
 
         </form>
+
+        <a href="/" class="home-btn">Home</a>
+
+
+
 
         <div class="msg">
             {{ message }}
