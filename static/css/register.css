@@ -97,3 +97,67 @@ body {
 .login-link a:hover {
     text-decoration: underline;
 }
+
+/* ============================= */
+/* 📱 REGISTER PAGE RESPONSIVE */
+/* ============================= */
+
+@media screen and (max-width: 768px) {
+
+    body {
+        padding: 20px 10px;
+        align-items: flex-start;
+    }
+
+    .register-container {
+        padding: 10px;
+    }
+
+    .register-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    .register-card h1 {
+        font-size: 28px;
+    }
+
+    .register-card input {
+        font-size: 14px;
+        padding: 11px;
+    }
+
+    .register-card button {
+        font-size: 15px;
+    }
+}
+
+/* EXTRA SMALL PHONES */
+
+@media screen and (max-width: 480px) {
+
+    .register-card {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .register-card h1 {
+        font-size: 24px;
+    }
+
+    .register-card input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .register-card button {
+        padding: 11px;
+        font-size: 14px;
+    }
+
+    .login-link {
+        font-size: 14px;
+    }
+}

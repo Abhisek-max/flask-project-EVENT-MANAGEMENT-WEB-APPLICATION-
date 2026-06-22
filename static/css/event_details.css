@@ -105,5 +105,49 @@ body {
 }
 
 .back-btn:hover {
-    box-shadow: 0 0 20px #00d4ff;
+    box-shadow: 0 0 20px #00d4ff; 
+}
+
+/* --mobile responsive */
+
+@media (max-width: 768px) {
+
+    .header {
+        padding: 25px 15px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .card {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 15px;
+    }
+
+    .card h2 {
+        font-size: 24px;
+    }
+
+    .card p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .button-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
 }

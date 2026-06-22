@@ -190,3 +190,102 @@ input[type="file"] {
 .remove-btn:hover {
     background: #dc2626;
 }
+
+
+/* ========================= */
+/* 📱 PROFILE RESPONSIVE */
+/* ========================= */
+
+@media screen and (max-width: 768px) {
+
+    .profile-title {
+        font-size: 30px;
+        margin-top: 25px;
+    }
+
+    .profile-card {
+        width: 92%;
+        padding: 20px;
+        margin: 25px auto;
+        box-sizing: border-box;
+    }
+
+    .profile-avatar {
+        width: 90px;
+        height: 90px;
+    }
+
+    .profile-name {
+        font-size: 22px;
+    }
+
+    .profile-info p {
+        font-size: 14px;
+        padding: 10px;
+        word-wrap: break-word;
+    }
+
+    input[type="file"] {
+        font-size: 12px;
+    }
+
+    /* Buttons in rows */
+    .profile-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .profile-buttons a,
+    .profile-buttons button {
+        padding: 10px 14px;
+        font-size: 13px;
+        margin: 0;
+    }
+
+    button.btn,
+    .remove-btn {
+        width: auto;
+    }
+}
+
+
+/* EXTRA SMALL PHONES */
+
+@media screen and (max-width: 480px) {
+
+    .profile-title {
+        font-size: 24px;
+    }
+
+    .profile-card {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .profile-avatar {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-name {
+        font-size: 18px;
+    }
+
+    .profile-info p {
+        font-size: 13px;
+    }
+
+    /* One button per line */
+    .profile-buttons {
+        flex-direction: column;
+    }
+
+    .profile-buttons a,
+    .profile-buttons button,
+    .remove-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

@@ -13,7 +13,6 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
-
 # ---------- DATABASE INIT ----------
 def init_db():
     conn = sqlite3.connect("events.db")
@@ -123,7 +122,7 @@ def admin():
 @app.route("/admin_logout")
 def admin_logout():
     session.pop("admin", None)
-    return redirect("/admin_login")
+    return redirect("/login")
 
 
 # ---------- EVENT DETAILS PAGE ----------
@@ -230,7 +229,6 @@ def delete_student(id):
     return redirect("/admin")
 
 
-
 # ---------- LOGIN EVENT ----------
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -263,13 +261,11 @@ def login():
     return render_template("login.html")
 
 
-
 # ---------- LOGOUT ----------
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/login")
-
 
 
 # ---------- ADD EVENT ----------
@@ -284,6 +280,7 @@ def add_event():
         guest_speaker = request.form.get("guest_speaker")
         event_goal = request.form.get("event_goal")
         description = request.form.get("description")
+        capacity = request.form.get("capacity")
 
         conn = sqlite3.connect("events.db")
         cursor = conn.cursor()
@@ -292,8 +289,8 @@ def add_event():
             """
             INSERT INTO events (
                 event_name, event_date, event_time,
-                venue, guest_speaker, event_goal, description
-            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                venue, guest_speaker, event_goal, description, capacity
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """,
             (
                 event_name,
@@ -303,6 +300,7 @@ def add_event():
                 guest_speaker,
                 event_goal,
                 description,
+                capacity,
             ),
         )
 
@@ -312,7 +310,6 @@ def add_event():
         return redirect(url_for("admin"))
 
     return render_template("add_event.html")
-
 
 
 # ---------- DELETE EVENT ----------
@@ -327,7 +324,6 @@ def delete_event(id):
     conn.close()
 
     return redirect(url_for("admin"))
-
 
 
 # ---------- EDIT EVENT ----------
@@ -377,7 +373,6 @@ def edit_event(id):
     return render_template("edit_event.html", event=event)
 
 
-
 # ---------- UPDATE DATABASE ----------
 @app.route("/update_db")
 def update_db():
@@ -397,7 +392,6 @@ def update_db():
         conn.close()
 
 
-
 # ---------- PROFILE EVENT ----------
 @app.route("/profile")
 def profile():
@@ -413,7 +407,6 @@ def profile():
     conn.close()
 
     return render_template("profile.html", user=user)
-
 
 
 # ----------  EDIT PROFILE EVENT ----------
@@ -465,7 +458,6 @@ def edit_profile():
     return render_template("edit_profile.html", user=user)
 
 
-
 # ---------- UPLOAD PROFILE PHOTO EVENT ----------
 @app.route("/upload_profile_photo", methods=["POST"])
 def upload_profile_photo():
@@ -499,7 +491,6 @@ def upload_profile_photo():
         conn.close()
 
     return redirect("/profile")
-
 
 
 # ---------- REMOVE PROFILE PHOTO EVENT ----------
@@ -539,7 +530,6 @@ def remove_profile_photo():
     conn.close()
 
     return redirect("/profile")
-
 
 
 # ---------- CHANGE PASSWORD EVENT ----------
@@ -591,7 +581,6 @@ def change_password():
     return render_template("change_password.html")
 
 
-
 # ---------- FORGOT PASSWORD EVENT ----------
 @app.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
@@ -632,7 +621,6 @@ def forgot_password():
     return render_template("forgot_password.html")
 
 
-
 # ---------- JOIN EVENT ----------
 @app.route("/join_event/<int:event_id>")
 def join_event(event_id):
@@ -658,6 +646,19 @@ def join_event(event_id):
         conn.close()
         return "You have already joined this event!"
 
+    # Event Capacity Check
+    cursor.execute("SELECT capacity FROM events WHERE id=?", (event_id,))
+
+    capacity = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM registrations WHERE event_id=?", (event_id,))
+
+    current = cursor.fetchone()[0]
+
+    if current >= capacity:
+        conn.close()
+        return "Event Full! Registration Closed."
+
     cursor.execute(
         """
         INSERT INTO registrations
@@ -671,7 +672,6 @@ def join_event(event_id):
     conn.close()
 
     return redirect("/my_events")
-
 
 
 # ---------- MY EVENTS ----------
@@ -702,7 +702,6 @@ def my_events():
     return render_template("my_events.html", events=events)
 
 
-
 # ---------- CLEAR REGISTRATIONS ----------
 @app.route("/clear_registrations")
 def clear_registrations():
@@ -716,7 +715,6 @@ def clear_registrations():
     conn.close()
 
     return "Registrations Cleared!"
-
 
 
 # ---------- PARTICIPANTS LIST ----------
@@ -752,7 +750,6 @@ def participants(event_id):
     return render_template("participants.html", participants=participants, event=event)
 
 
-
 # ---------- API: EVENT COUNTS ----------
 @app.route("/api/event_counts")
 def event_counts():
@@ -769,7 +766,6 @@ def event_counts():
     conn.close()
 
     return {row[0]: row[1] for row in rows}
-
 
 
 # ---------- ADMIN LOGIN ----------
@@ -803,7 +799,6 @@ def admin_login():
     return render_template("admin_login.html")
 
 
-
 # ---------- LEAVE EVENT ----------
 @app.route("/leave_event/<int:event_id>")
 def leave_event(event_id):
@@ -826,6 +821,29 @@ def leave_event(event_id):
     conn.close()
 
     return redirect("/my_events")
+
+
+# ---------- ADD CAPACITY COLUMN ----------
+@app.route("/add_capacity_column")
+def add_capacity_column():
+
+    conn = sqlite3.connect("events.db")
+    cursor = conn.cursor()
+
+    try:
+        cursor.execute("""
+            ALTER TABLE events
+            ADD COLUMN capacity INTEGER DEFAULT 50
+        """)
+
+        conn.commit()
+        return "Capacity Column Added!"
+
+    except Exception as e:
+        return str(e)
+
+    finally:
+        conn.close()
 
 
 # ---------- RUN ----------

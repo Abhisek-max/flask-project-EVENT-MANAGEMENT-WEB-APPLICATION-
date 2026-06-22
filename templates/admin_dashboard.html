@@ -135,6 +135,7 @@
         .action-buttons {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 10px;
             flex-wrap: wrap;
 
@@ -175,6 +176,48 @@
             }
 
         }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width:768px){
+
+    .header h1{
+        font-size:28px;
+    }
+
+    .container{
+        padding:10px;
+    }
+
+    .table-card{
+        padding:10px;
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:900px;
+    }
+
+    .top-links{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .top-links a{
+        width:90%;
+        margin:auto;
+    }
+
+    .btn{
+        min-width:auto;
+        width:100%;
+    }
+
+    .action-buttons{
+        flex-direction:column;
+    }
+}
     </style>
 
 

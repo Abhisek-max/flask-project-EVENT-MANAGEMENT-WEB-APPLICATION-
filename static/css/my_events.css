@@ -126,3 +126,87 @@ body {
 .leave-btn:hover {
     box-shadow: 0 0 12px #ef4444;
 }
+
+/* ========================= */
+/* 📱 MY EVENTS RESPONSIVE */
+/* ========================= */
+
+@media screen and (max-width: 768px) {
+
+    .header {
+        padding: 25px 15px;
+    }
+
+    .header h1 {
+        font-size: 30px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .event-card {
+        width: 90%;
+        max-width: 350px;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .event-card h2 {
+        font-size: 22px;
+    }
+
+    .event-card p {
+        font-size: 14px;
+    }
+
+    .btn {
+        display: block;
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .leave-btn {
+        margin-left: 0;
+    }
+
+    .no-events {
+        width: 90%;
+        padding: 25px;
+        box-sizing: border-box;
+    }
+}
+
+
+/* EXTRA SMALL PHONES */
+
+@media screen and (max-width: 480px) {
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .event-card {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .event-card h2 {
+        font-size: 18px;
+    }
+
+    .event-card p {
+        font-size: 13px;
+    }
+
+    .btn,
+    .leave-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .no-events {
+        width: 95%;
+        padding: 20px;
+    }
+}

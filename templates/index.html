@@ -127,6 +127,10 @@
 
         <h2>Upcoming Events</h2>
 
+        <div class="search-box">
+            <input type="text" id="eventSearch" placeholder="🔍 Search Events...">
+        </div>
+
         <div class="event-container">
 
             {% for event in events %}
@@ -177,6 +181,34 @@
         document.addEventListener("mousemove", (e) => {
             glow.style.left = e.clientX + "px";
             glow.style.top = e.clientY + "px";
+        });
+    </script>
+
+
+    <script>
+        const searchInput = document.getElementById("eventSearch");
+
+        searchInput.addEventListener("keyup", function () {
+
+            let filter = this.value.toLowerCase();
+
+            let cards = document.querySelectorAll(".event-card");
+
+            cards.forEach(card => {
+
+                let title = card.querySelector("h3")
+                    .innerText
+                    .toLowerCase();
+
+                if (title.includes(filter)) {
+                    card.style.display = "block";
+                }
+                else {
+                    card.style.display = "none";
+                }
+
+            });
+
         });
     </script>
 

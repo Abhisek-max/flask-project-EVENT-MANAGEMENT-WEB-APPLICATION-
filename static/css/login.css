@@ -124,3 +124,50 @@ body {
     border-radius: 8px;
     font-weight: bold;
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 15px;
+        align-items: flex-start;
+    }
+
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 25px 20px;
+        border-radius: 15px;
+    }
+
+    .login-card h1 {
+        font-size: 28px;
+    }
+
+    .login-card input {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .login-card button {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .register-link,
+    .forgot-password {
+        text-align: center;
+    }
+
+    .admin-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+}

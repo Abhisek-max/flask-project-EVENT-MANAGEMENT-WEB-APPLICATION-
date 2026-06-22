@@ -34,6 +34,7 @@
 
     .card {
       width: 500px;
+      max-width: 100%;
       background: rgba(101, 62, 62, 0.08);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
@@ -120,6 +121,54 @@
     .dashboard-link:hover {
       text-decoration: underline;
     }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+
+    body {
+        display: block;
+        min-height: 100vh;
+    }
+
+    .header {
+        padding: 20px 15px;
+    }
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .card {
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 15px;
+    }
+
+    .card h2 {
+        font-size: 22px;
+    }
+
+    input,
+    textarea {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .dashboard-link {
+        font-size: 14px;
+    }
+}
   </style>
 </head>
 
@@ -161,6 +210,10 @@
 
         <label for="description">Description</label>
         <textarea id="description" name="description" rows="4" placeholder="Describe the Event"></textarea>
+
+        <label>Event Capacity</label>
+
+        <input type="number" name="capacity" placeholder="Enter Maximum Seats" required>
 
         <button type="submit">
           Add Event
