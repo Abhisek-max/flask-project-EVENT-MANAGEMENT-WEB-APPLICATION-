@@ -4,9 +4,20 @@ from datetime import timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, session  # type: ignore[import]  # pylint: disable=import-error
 from werkzeug.utils import secure_filename  # type: ignore[import]  # pylint: disable=import-error
+from flask_mail import Mail, Message
+
 
 app = Flask(__name__)
 app.secret_key = "smart_college_secret_key"
+
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USERNAME"] = "eventifyconfirm@gmail.com"
+app.config["MAIL_PASSWORD"] = "jxasamlzzgnubgqw"
+app.config["MAIL_DEFAULT_SENDER"] = "eventifyconfirm@gmail.com"
+
+mail = Mail(app)
 
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SESSION_COOKIE_SECURE"] = True
@@ -639,14 +650,11 @@ def join_event(event_id):
     conn = sqlite3.connect("events.db")
     cursor = conn.cursor()
 
-    cursor.execute(
-        """
+    cursor.execute("""
         SELECT *
         FROM registrations
         WHERE student_id=? AND event_id=?
-    """,
-        (session["user_id"], event_id),
-    )
+    """, (session["user_id"], event_id))
 
     existing = cursor.fetchone()
 
@@ -656,31 +664,70 @@ def join_event(event_id):
 
     # Event Capacity Check
     cursor.execute("SELECT capacity FROM events WHERE id=?", (event_id,))
-
     capacity = cursor.fetchone()[0]
 
     cursor.execute("SELECT COUNT(*) FROM registrations WHERE event_id=?", (event_id,))
-
     current = cursor.fetchone()[0]
 
     if current >= capacity:
         conn.close()
         return "Event Full! Registration Closed."
 
-    cursor.execute(
-        """
+    # ✅ INSERT REGISTRATION
+    cursor.execute("""
         INSERT INTO registrations
         (student_id, event_id)
         VALUES (?, ?)
-    """,
-        (session["user_id"], event_id),
-    )
+    """, (session["user_id"], event_id))
 
     conn.commit()
+
+    # =========================
+    # 📧 EMAIL FEATURE START
+    # =========================
+
+    # Student details
+    cursor.execute("SELECT name, email FROM students WHERE id=?", (session["user_id"],))
+    student = cursor.fetchone()
+    student_name = student[0]
+    student_email = student[1]
+
+    # Event details
+    cursor.execute("SELECT event_name, event_date, event_time, venue FROM events WHERE id=?", (event_id,))
+    event = cursor.fetchone()
+
+    event_name = event[0]
+    event_date = event[1]
+    event_time = event[2]
+    venue = event[3]
+
+    # Email create
+    msg = Message(
+        subject="Event Registration Confirmed 🎉",
+        recipients=[student_email]
+    )
+
+    msg.body = f"""
+Hello {student_name},
+
+You have successfully joined the event.
+
+Event: {event_name}
+Date: {event_date}
+Time: {event_time}
+Venue: {venue}
+
+Thank you for registering!
+
+- Eventify Team
+"""
+
+    # Send email
+    mail.send(msg)
+
     conn.close()
 
     return redirect("/my_events")
-
 
 # ---------- MY EVENTS ----------
 @app.route("/my_events")
