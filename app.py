@@ -695,19 +695,15 @@ def join_event(event_id):
     # Event details
     cursor.execute("SELECT event_name, event_date, event_time, venue FROM events WHERE id=?", (event_id,))
     event = cursor.fetchone()
+    event_name, event_date, event_time, venue = event
 
-    event_name = event[0]
-    event_date = event[1]
-    event_time = event[2]
-    venue = event[3]
+    try:
+        msg = Message(
+            subject="Event Registration Confirmed 🎉",
+            recipients=[student_email]
+        )
 
-    # Email create
-    msg = Message(
-        subject="Event Registration Confirmed 🎉",
-        recipients=[student_email]
-    )
-
-    msg.body = f"""
+        msg.body = f"""
 Hello {student_name},
 
 You have successfully joined the event.
@@ -717,13 +713,13 @@ Date: {event_date}
 Time: {event_time}
 Venue: {venue}
 
-Thank you for registering!
-
 - Eventify Team
 """
 
-    # Send email
-    mail.send(msg)
+        mail.send(msg)
+
+    except Exception as e:
+        print("EMAIL ERROR:", e)
 
     conn.close()
 
